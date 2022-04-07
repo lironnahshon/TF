@@ -43,14 +43,38 @@ resource "aws_subnet" "subnet2" {
   		}
 }
 
+#Create DB_subnet #1
+
+resource "aws_subnet" "db_subnet1" {
+ 	 vpc_id           	 = aws_vpc.vpc.id
+ 	 cidr_block      	 = "10.0.48.0/20"
+ 	 availability_zone 	 = "us-east-1a"
+
+ 	 tags = {
+   		 Name = "DB_subnet1"
+  		 }
+}
+
+#Create DB_subnet #2
+
+resource "aws_subnet" "db_subnet2" {
+	vpc_id          	 = aws_vpc.vpc.id
+	cidr_block       	 = "10.0.64.0/20"
+	availability_zone	 = "us-east-1b"
+
+	tags = {
+   		Name = "DB_subnet2"
+  		}
+}
+
 #Create DB_Subnet_Group
 
 resource "aws_db_subnet_group" "db_subnet_group" {
  	 name       = "db_subnet_group"
- 	 subnet_ids = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
+ 	 subnet_ids = [aws_subnet.db_subnet1.id, aws_subnet.db_subnet2.id]
 
 	  tags = {
-  	  Name = "My DB subnet group"
+  	  Name = "DB subnet group"
  	 }
 }
 
