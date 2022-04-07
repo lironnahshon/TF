@@ -238,6 +238,5 @@ resource "aws_security_group" "sg" {
 
   tags = {
     Name = "allow_ssh_http"
-	
   }
 }
